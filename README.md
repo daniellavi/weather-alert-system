@@ -1,13 +1,25 @@
-How to run the project:
+## How to Run the Project
 
-1. Clone the repo and cd to weather-alert-system.
-2. Create a .env file with the following values:
+1. **Clone the repository** and navigate to the project folder:
+   ```bash
+   git clone <repo-url>
+   cd weather-alert-system
+2. Create a .env file in the root directory with the following values:
    TOMORROW_API_KEY=your_api_key
    PORT=3000
    ALERT_EVAL_INTERVAL_MINUTES=1
    SENDGRID_API_KEY=your_api_key
    FROM_EMAIL=your_verified_email
-4. Run npm install.
-5. Run npm start to run the server.
-6. Run npm run dev to run the client and go to http://localhost:5173 to see the web app.
-7. Login to the system using the following password - weather123 (username can be any value).
+3. Install dependencies: npm install
+4. Start the server:
+   ```bash
+   npm start
+7. Run the client:
+   ```bash
+   npm run dev
+8. Open http://localhost:5173 in your browser to view the web app.
+9. Login credentials:
+   - Username: Any value
+   - Password: weather123
+10. 
+
