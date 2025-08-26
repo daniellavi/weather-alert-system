@@ -31,7 +31,7 @@ const evalIntervalMinutes = Number(process.env.ALERT_EVAL_INTERVAL_MINUTES) || 5
 const schedule = `*/${evalIntervalMinutes} * * * *`;
 initializeCronJob(schedule, async () => await alertEvaluator.evaluateAlerts());
 
-app.post('/api/token', (req: Request, res: Response) => {
+app.post('/api/login', (req: Request, res: Response) => {
     const { username, password } = req.body;
     if (!username || !password) {
         return res.status(400).json({ error: 'username and password required' });
