@@ -1,6 +1,6 @@
 ## How to Run the Project
 
-1. **Clone the repository** and navigate to the project folder:
+1. Clone the repository and navigate to the project folder:
    ```bash
    git clone <repo-url>
    cd weather-alert-system
@@ -24,5 +24,3 @@
 9. Login credentials:
    - Username: Any value
    - Password: weather123
-10. 
-
