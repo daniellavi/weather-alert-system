@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { TextField, Button, MenuItem, CircularProgress, ButtonGroup } from '@mui/material';
+import WeatherAlertTable from './WeatherAlertTable';
 import { useInfiniteScroll } from './useInfiniteScroll';
 import { WEATHER_KEYS, WEATHER_UNITS } from './consts';
 import { getAlerts, createAlert } from './api';
@@ -186,17 +187,12 @@ const Alerts = () => {
       </form>
       <div className='alert-list'>
         <h3>Saved Alerts</h3>
-        {!alerts.length ? (
-          <div className='empty-state'>No alerts yet</div>
-        ) : (
-          <>
-            {alerts.map((a, i) => (
-              <div key={i} className='item'>
-                {a.location} - {WEATHER_KEYS.find(key => key.value === a.parameter)?.label} - {a.threshold}{WEATHER_UNITS[a.parameter]}
-              </div>
-            ))}
-          </>
-        )}
+        <WeatherAlertTable
+          alerts={alerts.map(alert => ({
+            ...alert,
+            location: alert.location ?? ''
+          }))}
+        />
       </div>
     </div>
   );
