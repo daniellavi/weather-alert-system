@@ -56,6 +56,7 @@ export class AlertDatabase {
                 console.info('Alert added successfully:', result.lastID);
                 return result.lastID;
             }
+
             const errorMessage = 'Failed to insert alert: lastID is undefined';
             console.error(errorMessage);
             throw new Error(errorMessage);
@@ -93,6 +94,7 @@ export class AlertDatabase {
                 query += params.length ? ' OFFSET ?' : ' LIMIT -1 OFFSET ?';
                 params.push(offset);
             }
+
             const results = await this.db.all(query, ...params);
             return results;
         } catch (error) {

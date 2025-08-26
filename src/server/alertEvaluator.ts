@@ -14,6 +14,7 @@ export class AlertEvaluator {
             const batchSize = 100;
             let offset = 0;
             let alerts: WeatherAlert[] = await this.alertDb.getAlerts(batchSize, offset);
+
             while (alerts.length > 0) {
                 for (const alert of alerts) {
                     let weather: any;

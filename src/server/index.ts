@@ -39,6 +39,7 @@ app.post('/api/token', (req: Request, res: Response) => {
     if (password !== DEMO_PASSWORD) {
         return res.status(401).json({ error: 'Invalid password' });
     }
+
     const token = generateToken({ username });
     res.json({ token });
 });
@@ -46,14 +47,14 @@ app.post('/api/token', (req: Request, res: Response) => {
 app.post('/api/alerts', authenticateToken, async (req: Request, res: Response) => {
     const { location, lat, lon, parameter, threshold, name, description, email } = req.body;
     if ((!location && (!lat || !lon)) || !parameter || !threshold) {
-        return res.status(400).json({ error: 'Either location or both lat/lon, plus parameter and threshold, are required' });
+        return res.status(400).json({ error: 'Either location or both lat/lon, parameter and threshold, are required' });
     }
 
     let coordinates;
     if (lat && lon) {
         coordinates = `${lat},${lon}`;
     }
-    console.log({ coordinates, location });
+
     try {
         const alert: WeatherAlert = {
             location: coordinates || location,
@@ -63,6 +64,7 @@ app.post('/api/alerts', authenticateToken, async (req: Request, res: Response) =
             description,
             email
         };
+
         const id = await alertDb.addAlert(alert);
         res.status(201).json({ id, ...alert });
     } catch (error) {
@@ -78,6 +80,7 @@ app.get('/api/alerts', authenticateToken, async (req: Request, res: Response) =>
             typeof req.query.triggered === 'string'
                 ? req.query.triggered === 'true'
                 : undefined;
+
         const alerts = await alertDb.getAlerts(limit, offset, triggered);
         res.json(alerts);
     } catch (error) {
@@ -99,6 +102,7 @@ app.get('/api/forecast', authenticateToken, async (req: Request, res: Response) 
     if (!(city || (lat && lon))) {
         return res.status(400).json({ error: 'location required: provide either city or lat and lon' });
     }
+
     try {
         const forecast = await weatherProvider.getForecast({
             city: city ? String(city) : undefined,

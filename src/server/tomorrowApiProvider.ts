@@ -30,6 +30,7 @@ export class TomorrowApiProvider {
                 console.error(errorMessage);
                 throw new Error(errorMessage);
             }
+
             const response: AxiosResponse = await axios.get(this.baseUrl, {
                 params: {
                     location,
